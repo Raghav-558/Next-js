@@ -1,167 +1,62 @@
 'use client'
-import React, { useState } from 'react'
+import React, { useState } from "react";
 
 const Calculator = () => {
-  const [value, setValue] = useState('')
+  const [input, setInput] = useState("");
 
-  const handleClick = e => {
-    setValue(value + e.target.value)
-  }
+  const handleClick = (value) => {
+    setInput((prev) => prev + value);
+  };
 
   const handleClear = () => {
-    setValue('')
-  }
+    setInput("");
+  };
 
-  const handleDelete = () => {
-    setValue(value.slice(0, -1))
-  }
-
-  const handleEvaluate = () => {
+  const handleCalculate = () => {
     try {
-      setValue(eval(value).toString())
+      setInput(eval(input).toString());
     } catch {
-      setValue('Error')
+      setInput("Error");
     }
-  }
+  };
+
+  const buttons = [
+    ["0", "1", "2", "/",
+    "3", "4", "5", "*",
+    "6", "7", "8", "-",
+    "9", ".", "=", "+"],
+  ];
 
   return (
-    <div className='bg-black max-w-[1172px] px-4 mx-auto flex items-center justify-center min-h-screen'>
-      <div className='calculator p-4 rounded-xl bg-white'>
-        <div className='flex justify-end m-[5px_0px_15px_0px]'>
-          <input
-            className='text-right px-4 text-xl border-none outline-none size-[60px] font-semibold rounded-xl w-full bg-gray-400'
-            type='text'
-            value={value}
-            readOnly
-          />
-        </div>
-        <div>
-          <input
-            className='border-none outline-none size-[60px] text-base font-semibold m-[2px] cursor-pointer rounded-xl bg-gray-400 hover:bg-gray-600 transition-all duration-300 hover:text-white'
-            type='button'
-            value='AC'
+    <div className="flex justify-center items-center h-screen bg-black">
+      <div className="bg-gray-200 p-6 rounded-lg shadow-lg w-80">
+        <input
+          type="text"
+          value={input}
+          readOnly
+          className="w-full mb-4 p-2 text-right text-black text-xl border rounded-lg"
+        />
+        <div className="grid grid-cols-4 gap-2">
+          {buttons.flat().map((button) => (
+            <button
+              key={button}
+              onClick={() =>
+                button === "=" ? handleCalculate() : handleClick(button)
+              }
+              className="p-4 text-xl text-black bg-gray-400 rounded-lg hover:bg-gray-600 hover:text-white transition-all duration-300"
+            >
+              {button}
+            </button>
+          ))}
+          <button
             onClick={handleClear}
-          />
-          <input
-            className='border-none outline-none size-[60px] text-base font-semibold m-[2px] cursor-pointer rounded-xl bg-gray-400 hover:bg-gray-600 transition-all duration-300 hover:text-white'
-            type='button'
-            value='DE'
-            onClick={handleDelete}
-          />
-          <input
-            className='border-none outline-none size-[60px] text-base font-semibold m-[2px] cursor-pointer rounded-xl bg-gray-400 hover:bg-gray-600 transition-all duration-300 hover:text-white'
-            type='button'
-            value='.'
-            onClick={handleClick}
-          />
-          <input
-            className='border-none outline-none size-[60px] text-base font-semibold m-[2px] cursor-pointer rounded-xl bg-gray-400 hover:bg-gray-600 transition-all duration-300 hover:text-white'
-            type='button'
-            value='/'
-            onClick={handleClick}
-          />
-        </div>
-        <div>
-          <input
-            className='border-none outline-none size-[60px] text-base font-semibold m-[2px] cursor-pointer rounded-xl bg-gray-400 hover:bg-gray-600 transition-all duration-300 hover:text-white'
-            type='button'
-            value='7'
-            onClick={handleClick}
-          />
-          <input
-            className='border-none outline-none size-[60px] text-base font-semibold m-[2px] cursor-pointer rounded-xl bg-gray-400 hover:bg-gray-600 transition-all duration-300 hover:text-white'
-            type='button'
-            value='8'
-            onClick={handleClick}
-          />
-          <input
-            className='border-none outline-none size-[60px] text-base font-semibold m-[2px] cursor-pointer rounded-xl bg-gray-400 hover:bg-gray-600 transition-all duration-300 hover:text-white'
-            type='button'
-            value='9'
-            onClick={handleClick}
-          />
-          <input
-            className='border-none outline-none size-[60px] text-base font-semibold m-[2px] cursor-pointer rounded-xl bg-gray-400 hover:bg-gray-600 transition-all duration-300 hover:text-white'
-            type='button'
-            value='*'
-            onClick={handleClick}
-          />
-        </div>
-        <div>
-          <input
-            className='border-none outline-none size-[60px] text-base font-semibold m-[2px] cursor-pointer rounded-xl bg-gray-400 hover:bg-gray-600 transition-all duration-300 hover:text-white'
-            type='button'
-            value='4'
-            onClick={handleClick}
-          />
-          <input
-            className='border-none outline-none size-[60px] text-base font-semibold m-[2px] cursor-pointer rounded-xl bg-gray-400 hover:bg-gray-600 transition-all duration-300 hover:text-white'
-            type='button'
-            value='5'
-            onClick={handleClick}
-          />
-          <input
-            className='border-none outline-none size-[60px] text-base font-semibold m-[2px] cursor-pointer rounded-xl bg-gray-400 hover:bg-gray-600 transition-all duration-300 hover:text-white'
-            type='button'
-            value='6'
-            onClick={handleClick}
-          />
-          <input
-            className='border-none outline-none size-[60px] text-base font-semibold m-[2px] cursor-pointer rounded-xl bg-gray-400 hover:bg-gray-600 transition-all duration-300 hover:text-white'
-            type='button'
-            value='+'
-            onClick={handleClick}
-          />
-        </div>
-        <div>
-          <input
-            className='border-none outline-none size-[60px] text-base font-semibold m-[2px] cursor-pointer rounded-xl bg-gray-400 hover:bg-gray-600 transition-all duration-300 hover:text-white'
-            type='button'
-            value='1'
-            onClick={handleClick}
-          />
-          <input
-            className='border-none outline-none size-[60px] text-base font-semibold m-[2px] cursor-pointer rounded-xl bg-gray-400 hover:bg-gray-600 transition-all duration-300 hover:text-white'
-            type='button'
-            value='2'
-            onClick={handleClick}
-          />
-          <input
-            className='border-none outline-none size-[60px] text-base font-semibold m-[2px] cursor-pointer rounded-xl bg-gray-400 hover:bg-gray-600 transition-all duration-300 hover:text-white'
-            type='button'
-            value='3'
-            onClick={handleClick}
-          />
-          <input
-            className='border-none outline-none size-[60px] text-base font-semibold m-[2px] cursor-pointer rounded-xl bg-gray-400 hover:bg-gray-600 transition-all duration-300 hover:text-white'
-            type='button'
-            value='-'
-            onClick={handleClick}
-          />
-        </div>
-        <div>
-          <input
-            className='border-none outline-none size-[60px] text-base font-semibold m-[2px] cursor-pointer rounded-xl bg-gray-400 hover:bg-gray-600 transition-all duration-300 hover:text-white'
-            type='button'
-            value='00'
-            onClick={handleClick}
-          />
-          <input
-            className='border-none outline-none size-[60px] text-base font-semibold m-[2px] cursor-pointer rounded-xl bg-gray-400 hover:bg-gray-600 transition-all duration-300 hover:text-white'
-            type='button'
-            value='0'
-            onClick={handleClick}
-          />
-          <input
-            className='w-[125px] h-[60px] border-none outline-none text-base font-semibold m-[2px] cursor-pointer rounded-xl bg-gray-400 hover:bg-gray-600 transition-all duration-300 hover:text-white'
-            type='button'
-            value='='
-            onClick={handleEvaluate}
-          />
+            className="col-span-4 p-4 text-xl bg-red-500 text-black rounded-lg hover:bg-red-600 transition-all duration-300 hover:text-white"
+          >
+            Clear
+          </button>
         </div>
       </div>
     </div>
-  )
-}
-
-export default Calculator
+  );
+};
+export default Calculator;

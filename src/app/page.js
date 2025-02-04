@@ -1,10 +1,11 @@
 import Calculator from "@/components/Calculator";
-import Image from "next/image";
+import FormDataStore from "@/components/FormDataStore";
 
 export default function Home() {
   return (
     <>
-      <Calculator />
+      {/* <Calculator /> */}
+      <FormDataStore/>
     </>
   );
 }
